@@ -6,7 +6,7 @@ const qa = [
     },
     {
         question: "If yes, do you have 1 year of related work experience?",
-        answer: "✅ Yes — Recent work as a Data Analyst at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System.",
+        answer: "✅ Yes — Recent work as a Data Analyst and Full STack Developer at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System.",
         image: "images/work-experience.jpg"
     },
     {
@@ -64,6 +64,7 @@ const qa = [
 let currentIndex = 0;
 let isAnswerShown = false;
 let likedQuestions = new Set(); // Track which questions have been liked
+let questionComments = {}; // Store comments for each question
 
 // DOM elements
 const questionEl = document.getElementById('question');
