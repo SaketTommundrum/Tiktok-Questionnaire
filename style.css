@@ -28,6 +28,27 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: all 0.8s ease;
+}
+
+/* Main container with answer background */
+.main-container.answer-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Overlay for better text readability when background image is shown */
+.main-container.answer-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    border-radius: 17px;
 }
 
 /* TikTok-style header */
@@ -53,6 +74,12 @@ body {
     color: #00f2ea;
     text-align: center;
     text-shadow: 0 0 10px rgba(0, 242, 234, 0.5);
+}
+
+/* Ensure all content stays above the overlay */
+.question-container, .swipe-area, .answer-section, .progress-indicator, .side-buttons {
+    position: relative;
+    z-index: 2;
 }
 
 .question-container {

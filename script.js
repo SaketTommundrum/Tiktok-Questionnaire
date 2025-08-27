@@ -36,7 +36,7 @@ const qa = [
     },
     {
         question: "Do you have 1 year of experience performing statistical analysis using Python or R?",
-        answer: "✅ Yes — Applied NumPy, Pandas, Statsmodels & SciPy for regression analysis, forecasting & hypothesis testing.",
+        answer: "✅ Yes — Applied NumPy, Pandas, Statsmodels & SciPy for sales forecast and real estate price prediction",
         image: "images/python-statistics.jpg"
     },
     {
@@ -103,6 +103,11 @@ function displayQuestion() {
         answerEl.classList.remove('show');
         answerEl.style.backgroundImage = '';
         
+        // Reset main container background
+        const mainContainer = document.querySelector('.main-container');
+        mainContainer.style.backgroundImage = '';
+        mainContainer.classList.remove('answer-background');
+        
         // Reset swipe area visibility and state
         swipeArea.style.display = 'flex';
         swipeArea.style.opacity = '1';
@@ -159,9 +164,13 @@ function revealAnswer() {
             swipeArea.style.display = 'none';
             answerEl.classList.add('show');
             
-            // Set background image for the answer
+            // Set background image for the entire phone container
+            const mainContainer = document.querySelector('.main-container');
             if (qa[currentIndex].image) {
-                answerEl.style.backgroundImage = `url('${qa[currentIndex].image}')`;
+                mainContainer.style.backgroundImage = `url('${qa[currentIndex].image}')`;
+                mainContainer.style.backgroundSize = 'cover';
+                mainContainer.style.backgroundPosition = 'center';
+                mainContainer.classList.add('answer-background');
             }
             
             nextBtn.style.display = 'block';
