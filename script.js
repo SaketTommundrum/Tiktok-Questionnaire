@@ -137,9 +137,11 @@ function showCompletion() {
 
 // Update progress bar
 function updateProgress() {
-    const progress = ((currentIndex + 1) / qa.length) * 100;
+    // Ensure we don't show progress beyond the total number of questions
+    const currentQuestion = Math.min(currentIndex + 1, qa.length);
+    const progress = (currentQuestion / qa.length) * 100;
     progressBar.style.setProperty('--progress', `${progress}%`);
-    progressText.textContent = `Question ${currentIndex + 1} of ${qa.length}`;
+    progressText.textContent = `Question ${currentQuestion} of ${qa.length}`;
 }
 
 // Go to previous question
@@ -306,12 +308,15 @@ function setupSwipeDetection() {
         e.stopPropagation();
         
         currentIndex++;
-        displayQuestion();
-        updateProgress();
         
-        // Update button text based on whether answer was shown
+        // Only update progress if we haven't completed all questions
         if (currentIndex < qa.length) {
+            displayQuestion();
+            updateProgress();
             nextBtn.textContent = isAnswerShown ? 'Next Question ➡️' : 'Skip Question ⏭️';
+        } else {
+            // Show completion screen
+            showCompletion();
         }
     });
     
@@ -337,10 +342,13 @@ document.addEventListener('keydown', (e) => {
         goToPreviousQuestion();
     } else if (e.key === 'ArrowRight' || e.key === 'Enter') {
         e.preventDefault();
-        if (isAnswerShown && currentIndex < qa.length) {
+        if (isAnswerShown && currentIndex < qa.length - 1) {
             currentIndex++;
             displayQuestion();
             updateProgress();
+        } else if (isAnswerShown && currentIndex === qa.length - 1) {
+            currentIndex++;
+            showCompletion();
         }
     } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
