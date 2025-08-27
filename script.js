@@ -63,6 +63,7 @@ const qa = [
 
 let currentIndex = 0;
 let isAnswerShown = false;
+let likedQuestions = new Set(); // Track which questions have been liked
 
 // DOM elements
 const questionEl = document.getElementById('question');
@@ -118,6 +119,9 @@ function displayQuestion() {
         nextBtn.style.display = 'block';
         nextBtn.textContent = 'Skip Question ⏭️';
         
+        // Update like button state
+        updateLikeButtonState();
+        
         // Reset answer state
         isAnswerShown = false;
     } else {
@@ -150,6 +154,33 @@ function goToPreviousQuestion() {
         currentIndex--;
         displayQuestion();
         updateProgress();
+    }
+}
+
+// Update like button state based on current question
+function updateLikeButtonState() {
+    const likeBtn = document.querySelector('.side-btn');
+    if (likedQuestions.has(currentIndex)) {
+        likeBtn.classList.add('liked');
+    } else {
+        likeBtn.classList.remove('liked');
+    }
+}
+
+// Handle like button click
+function handleLikeClick() {
+    const likeBtn = document.querySelector('.side-btn');
+    
+    if (likedQuestions.has(currentIndex)) {
+        // Unlike the question
+        likedQuestions.delete(currentIndex);
+        likeBtn.classList.remove('liked');
+        console.log(`Unliked question ${currentIndex + 1}`);
+    } else {
+        // Like the question
+        likedQuestions.add(currentIndex);
+        likeBtn.classList.add('liked');
+        console.log(`Liked question ${currentIndex + 1}`);
     }
 }
 
@@ -327,6 +358,14 @@ function setupSwipeDetection() {
     
     nextBtn.addEventListener('touchstart', (e) => {
         console.log('Next button touchstart detected');
+    });
+    
+    // Like button functionality
+    const likeBtn = document.querySelector('.side-btn');
+    likeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleLikeClick();
     });
 }
 

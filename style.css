@@ -279,6 +279,19 @@ body {
     box-shadow: 0 6px 20px rgba(0, 242, 234, 0.4);
 }
 
+/* Liked state for the like button */
+.side-btn.liked {
+    background: rgba(0, 242, 234, 0.9);
+    border-color: #00f2ea;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 242, 234, 0.5);
+}
+
+.side-btn.liked:hover {
+    background: rgba(0, 242, 234, 1);
+    transform: scale(1.2);
+}
+
 .completion {
     text-align: center;
     padding: 80px 20px 40px 20px;
