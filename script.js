@@ -26,7 +26,7 @@ const qa = [
     },
     {
         question: "Do you have 1 year of experience automating data reports and quality reviews?",
-        answer: "✅ Yes — Automated reporting pipelines using Python, SQL, and Power BI, and leveraged Microsoft Power Automate to schedule refreshes, distribute dashboards, and trigger email alerts, ensuring 100% data accuracy and efficiency.",
+        answer: "✅ Yes — Automated reporting pipelines using Python, SQL, and Power BI, and leveraged Microsoft Power Automate to schedule refreshes, distribute dashboards, and trigger email alerts, ensuring data accuracy and efficiency.",
         image: "images/automation.jpg"
     },
     {
