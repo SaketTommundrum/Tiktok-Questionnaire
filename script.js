@@ -300,7 +300,11 @@ function setupSwipeDetection() {
     });
 
     // Next button
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', (e) => {
+        console.log('Next button clicked!', { currentIndex, isAnswerShown });
+        e.preventDefault();
+        e.stopPropagation();
+        
         currentIndex++;
         displayQuestion();
         updateProgress();
@@ -309,6 +313,15 @@ function setupSwipeDetection() {
         if (currentIndex < qa.length) {
             nextBtn.textContent = isAnswerShown ? 'Next Question ➡️' : 'Skip Question ⏭️';
         }
+    });
+    
+    // Backup click handler for debugging
+    nextBtn.addEventListener('mousedown', (e) => {
+        console.log('Next button mousedown detected');
+    });
+    
+    nextBtn.addEventListener('touchstart', (e) => {
+        console.log('Next button touchstart detected');
     });
 }
 
