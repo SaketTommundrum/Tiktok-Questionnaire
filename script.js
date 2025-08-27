@@ -1,7 +1,7 @@
 const qa = [
     {
         question: "Do you have a Master's degree or foreign equivalent degree in Computer Science, Engineering, Data Science, Analytics, Business or related field?",
-        answer: "✅ Yes — I hold a Master's in Data Science & Business Analytics (GPA: 3.9/4.0), specializing in ML, BI dashboards & statistical analysis.",
+        answer: "✅ Yes — I hold a Master's in Data Science & Business Analytics (GPA: 3.9/4.0), specializing in BI dashboards, data analysis, ML & statistical analysis.",
         image: "images/masters-degree.jpg"
     },
     {
@@ -26,7 +26,7 @@ const qa = [
     },
     {
         question: "Do you have 1 year of experience automating data reports and quality reviews?",
-        answer: "✅ Yes — Automated reporting pipelines using Python, SQL, and Power BI, and leveraged Microsoft Power Automate to schedule refreshes, distribute dashboards and trigger email alerts, ensuring data accuracy and efficiency.",
+        answer: "✅ Yes — Automated reporting pipelines using Python, SQL and Power BI and leveraged Microsoft Power Automate to schedule refreshes, distribute dashboards and trigger email alerts, ensuring data accuracy and efficiency.",
         image: "images/automation.jpg"
     },
     {
