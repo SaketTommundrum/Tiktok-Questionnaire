@@ -26,7 +26,7 @@ const qa = [
     },
     {
         question: "Do you have 1 year of experience automating data reports and quality reviews?",
-        answer: "✅ Yes — Automated reporting pipelines using Python, SQL, and Power BI, and leveraged Microsoft Power Automate to schedule refreshes, distribute dashboards, and trigger email alerts, ensuring data accuracy and efficiency.",
+        answer: "✅ Yes — Automated reporting pipelines using Python, SQL, and Power BI, and leveraged Microsoft Power Automate to schedule refreshes, distribute dashboards and trigger email alerts, ensuring data accuracy and efficiency.",
         image: "images/automation.jpg"
     },
     {
@@ -136,6 +136,15 @@ function updateProgress() {
     progressText.textContent = `Question ${currentIndex + 1} of ${qa.length}`;
 }
 
+// Go to previous question
+function goToPreviousQuestion() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        displayQuestion();
+        updateProgress();
+    }
+}
+
 // Reveal answer with animation
 function revealAnswer() {
     if (!isAnswerShown) {
@@ -187,10 +196,16 @@ function setupSwipeDetection() {
         const currentY = e.touches[0].clientY;
         const distance = startY - currentY;
         
-        // Visual feedback during swipe
+        // Visual feedback during swipe (both up and down)
         if (distance > 0) {
+            // Swipe up feedback
             const progress = Math.min(distance / 100, 1);
             swipeArea.style.transform = `translateY(-${distance * 0.3}px)`;
+            swipeArea.style.opacity = 1 - (progress * 0.3);
+        } else if (distance < 0) {
+            // Swipe down feedback
+            const progress = Math.min(Math.abs(distance) / 100, 1);
+            swipeArea.style.transform = `translateY(${Math.abs(distance) * 0.3}px)`;
             swipeArea.style.opacity = 1 - (progress * 0.3);
         }
     });
@@ -207,9 +222,13 @@ function setupSwipeDetection() {
         swipeArea.style.opacity = '';
         isDragging = false;
         
-        // Check if it's a valid swipe up
+        // Check if it's a valid swipe up (reveal answer)
         if (distance > 50 && timeDiff < 1000) {
             revealAnswer();
+        }
+        // Check if it's a valid swipe down (previous question)
+        else if (distance < -50 && timeDiff < 1000) {
+            goToPreviousQuestion();
         }
     });
 
@@ -227,10 +246,16 @@ function setupSwipeDetection() {
         const currentY = e.clientY;
         const distance = startY - currentY;
         
-        // Visual feedback during drag
+        // Visual feedback during drag (both up and down)
         if (distance > 0) {
+            // Drag up feedback
             const progress = Math.min(distance / 100, 1);
             swipeArea.style.transform = `translateY(-${distance * 0.3}px)`;
+            swipeArea.style.opacity = 1 - (progress * 0.3);
+        } else if (distance < 0) {
+            // Drag down feedback
+            const progress = Math.min(Math.abs(distance) / 100, 1);
+            swipeArea.style.transform = `translateY(${Math.abs(distance) * 0.3}px)`;
             swipeArea.style.opacity = 1 - (progress * 0.3);
         }
     });
@@ -247,9 +272,13 @@ function setupSwipeDetection() {
         swipeArea.style.opacity = '';
         isDragging = false;
         
-        // Check if it's a valid swipe up
+        // Check if it's a valid swipe up (reveal answer)
         if (distance > 30 && timeDiff < 1000) {
             revealAnswer();
+        }
+        // Check if it's a valid swipe down (previous question)
+        else if (distance < -30 && timeDiff < 1000) {
+            goToPreviousQuestion();
         }
     });
 
@@ -274,6 +303,9 @@ document.addEventListener('keydown', (e) => {
         if (!isAnswerShown) {
             revealAnswer();
         }
+    } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        goToPreviousQuestion();
     } else if (e.key === 'ArrowRight' || e.key === 'Enter') {
         e.preventDefault();
         if (isAnswerShown && currentIndex < qa.length) {
@@ -281,6 +313,9 @@ document.addEventListener('keydown', (e) => {
             displayQuestion();
             updateProgress();
         }
+    } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToPreviousQuestion();
     }
 });
 

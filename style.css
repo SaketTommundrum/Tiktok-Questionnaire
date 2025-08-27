@@ -84,7 +84,7 @@ body {
 
 .swipe-container {
     position: absolute;
-    bottom: 220px;
+    bottom: 160px;
     left: 50%;
     transform: translateX(-50%);
     width: 280px;
@@ -217,7 +217,7 @@ body {
 .side-controls {
     position: absolute;
     right: 15px;
-    bottom: 200px;
+    bottom: 180px;
     display: flex;
     flex-direction: column;
     gap: 15px;
