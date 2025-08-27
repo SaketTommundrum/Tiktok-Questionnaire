@@ -11,7 +11,7 @@ const qa = [
     },
     {
         question: "Do you have a Bachelor's degree or foreign equivalent?",
-        answer: "✅ Yes — Bachelor's in Mechanical Engineering (GPA 3.87/4.0). Specializing in design engineering, optimization and engineering management",
+        answer: "✅ Yes — Bachelor's in Mechanical Engineering (GPA 3.87/4.0). Specializing in design optimization and engineering management",
         image: "images/bachelors-degree.jpg"
     },
     {
@@ -114,8 +114,9 @@ function displayQuestion() {
         swipeArea.style.transform = '';
         swipeArea.classList.remove('swipe-success', 'swiping');
         
-        // Hide next button
-        nextBtn.style.display = 'none';
+        // Show next button (now always visible)
+        nextBtn.style.display = 'block';
+        nextBtn.textContent = 'Skip Question ⏭️';
         
         // Reset answer state
         isAnswerShown = false;
@@ -174,6 +175,7 @@ function revealAnswer() {
             }
             
             nextBtn.style.display = 'block';
+            nextBtn.textContent = 'Next Question ➡️';
             isAnswerShown = true;
         }, 200);
         
@@ -302,6 +304,11 @@ function setupSwipeDetection() {
         currentIndex++;
         displayQuestion();
         updateProgress();
+        
+        // Update button text based on whether answer was shown
+        if (currentIndex < qa.length) {
+            nextBtn.textContent = isAnswerShown ? 'Next Question ➡️' : 'Skip Question ⏭️';
+        }
     });
 }
 
