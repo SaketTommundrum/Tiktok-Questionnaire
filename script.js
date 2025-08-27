@@ -6,7 +6,7 @@ const qa = [
     },
     {
         question: "If yes, do you have 1 year of related work experience?",
-        answer: "✅ Yes — Recent work as a Data Analyst at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System.",
+        answer: "✅ Yes — Recent work as a Data Analyst and Full Stack Developer at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System.",
         image: "images/work-experience.jpg"
     },
     {
