@@ -137,7 +137,7 @@ body {
     bottom: 200px;
     left: 20px;
     right: 20px;
-    color: #00f2ea;
+    color: #ffffff;
     font-weight: bold;
     font-size: 16px;
     padding: 20px;
@@ -151,6 +151,22 @@ body {
     box-shadow: 0 5px 20px rgba(0, 242, 234, 0.2);
     text-align: center;
     line-height: 1.4;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.answer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 13px;
+    z-index: -1;
 }
 
 .answer.show {

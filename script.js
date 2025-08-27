@@ -1,51 +1,63 @@
 const qa = [
     {
         question: "Do you have a Master's degree or foreign equivalent degree in Computer Science, Engineering, Data Science, Analytics, Business or related field?",
-        answer: "✅ Yes — I hold a Master's in Data Science & Business Analytics (GPA: 3.9/4.0), specializing in ML, BI dashboards & statistical analysis."
+        answer: "✅ Yes — I hold a Master's in Data Science & Business Analytics (GPA: 3.9/4.0), specializing in ML, BI dashboards & statistical analysis.",
+        image: "images/masters-degree.jpg"
     },
     {
         question: "If yes, do you have 1 year of related work experience?",
-        answer: "✅ Yes — Recent work as a Data Analyst at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System."
+        answer: "✅ Yes — Recent work as a Data Analyst at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System.",
+        image: "images/work-experience.jpg"
     },
     {
         question: "Do you have a Bachelor's degree or foreign equivalent?",
-        answer: "✅ Yes — Bachelor's in Mechanical Engineering. Led a Solar EV team achieving a 25% efficiency improvement using simulation-driven design."
+        answer: "✅ Yes — Bachelor's in Mechanical Engineering. Led a Solar EV team achieving a 25% efficiency improvement using simulation-driven design.",
+        image: "images/bachelors-degree.jpg"
     },
     {
         question: "Do you have 3 years of related work experience?",
-        answer: "✅ Yes — Over 3 years as Technical & Marketing Lead at Team Solarium, leveraging business analytics to craft national-level business strategies and present award-winning plans."
+        answer: "✅ Yes — Over 3 years as Technical & Marketing Lead at Team Solarium, leveraging business analytics to craft national-level business strategies and present award-winning plans.",
+        image: "images/team-leadership.jpg"
     },
     {
         question: "Do you have 1 year of experience using SQL on large datasets?",
-        answer: "✅ Yes — 2+ years of experience querying & optimizing large-scale datasets (1.8M+ rows) for dashboards & reporting."
+        answer: "✅ Yes — 2+ years of experience querying & optimizing large-scale datasets (1.8M+ rows) for dashboards & reporting.",
+        image: "images/sql-database.jpg"
     },
     {
         question: "Do you have 1 year of experience automating data reports and quality reviews?",
-        answer: "✅ Yes — Built automated reporting pipelines in Python, Power BI & SQL, reducing manual reporting time by 70%."
+        answer: "✅ Yes — Built automated reporting pipelines in Python, Power BI & SQL, reducing manual reporting time by 70%.",
+        image: "images/automation.jpg"
     },
     {
         question: "Do you have 1 year of experience identifying business problems and proposing growth opportunities?",
-        answer: "✅ Yes — Delivered insights via Power BI dashboards that helped executives cut operational costs by 18%."
+        answer: "✅ Yes — Delivered insights via Power BI dashboards that helped executives cut operational costs by 18%.",
+        image: "images/business-analytics.jpg"
     },
     {
         question: "Do you have 1 year of experience performing statistical analysis using Python or R?",
-        answer: "✅ Yes — Applied NumPy, Pandas, Statsmodels & SciPy for regression analysis, forecasting & hypothesis testing."
+        answer: "✅ Yes — Applied NumPy, Pandas, Statsmodels & SciPy for regression analysis, forecasting & hypothesis testing.",
+        image: "images/python-statistics.jpg"
     },
     {
         question: "Do you have 1 year of experience building dashboards and visualizations?",
-        answer: "✅ Yes — Built interactive Power BI dashboards with YoY KPIs, predictive forecasting & advanced DAX measures."
+        answer: "✅ Yes — Built interactive Power BI dashboards with YoY KPIs, predictive forecasting & advanced DAX measures.",
+        image: "images/dashboards.jpg"
     },
     {
         question: "Are you willing to commute and/or relocate to Bellevue, WA?",
-        answer: "✅ Yes — Open to relocation and flexible with hybrid/onsite roles."
+        answer: "✅ Yes — Open to relocation and flexible with hybrid/onsite roles.",
+        image: "images/bellevue-wa.jpg"
     },
     {
         question: "Are you willing to travel domestically and internationally up to 15%?",
-        answer: "✅ Yes — Comfortable with both domestic & international travel."
+        answer: "✅ Yes — Comfortable with both domestic & international travel.",
+        image: "images/travel.jpg"
     },
     {
         question: "Are you willing to accept a salary between $150,987 - $206,172?",
-        answer: "✅ Yes — Open to discussion and focused on roles with growth potential."
+        answer: "✅ Yes — Open to discussion and focused on roles with growth potential.",
+        image: "images/salary-growth.jpg"
     }
 ];
 
@@ -87,8 +99,9 @@ function displayQuestion() {
         questionEl.textContent = `Q${currentIndex + 1}: ${qa[currentIndex].question}`;
         answerEl.textContent = `Answer: ${qa[currentIndex].answer}`;
         
-        // Reset answer visibility
+        // Reset answer visibility and background
         answerEl.classList.remove('show');
+        answerEl.style.backgroundImage = '';
         
         // Reset swipe area visibility and state
         swipeArea.style.display = 'flex';
@@ -136,6 +149,12 @@ function revealAnswer() {
         setTimeout(() => {
             swipeArea.style.display = 'none';
             answerEl.classList.add('show');
+            
+            // Set background image for the answer
+            if (qa[currentIndex].image) {
+                answerEl.style.backgroundImage = `url('${qa[currentIndex].image}')`;
+            }
+            
             nextBtn.style.display = 'block';
             isAnswerShown = true;
         }, 200);
