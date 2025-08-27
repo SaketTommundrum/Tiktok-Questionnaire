@@ -20,10 +20,10 @@ body {
 .main-container {
     width: 375px;
     height: 667px;
-    background: linear-gradient(135deg, #ff0050, #000000);
+    background: linear-gradient(135deg, #1a1a1a, #000000);
     border-radius: 25px;
-    border: 8px solid #1a1a1a;
-    box-shadow: 0 0 30px rgba(255, 0, 80, 0.3);
+    border: 8px solid #333333;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -37,20 +37,22 @@ body {
     left: 0;
     right: 0;
     height: 60px;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 100;
     border-radius: 25px 25px 0 0;
+    border-bottom: 1px solid #333;
 }
 
 .title {
     font-size: 18px;
     font-weight: bold;
-    color: white;
+    color: #00f2ea;
     text-align: center;
+    text-shadow: 0 0 10px rgba(0, 242, 234, 0.5);
 }
 
 .question-container {
@@ -70,9 +72,14 @@ body {
     font-weight: 600;
     line-height: 1.4;
     text-align: center;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .swipe-container {
@@ -91,13 +98,13 @@ body {
 .swipe-area {
     width: 100%;
     height: 120px;
-    border: 2px dashed #ff0050;
+    border: 2px dashed #00f2ea;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 0, 80, 0.15);
+    background: rgba(0, 242, 234, 0.1);
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
@@ -118,15 +125,16 @@ body {
 }
 
 .swipe-text {
-    color: #ff0050;
+    color: #00f2ea;
     font-weight: bold;
     font-size: 16px;
     animation: pulse 1.5s infinite;
     text-align: center;
+    text-shadow: 0 0 10px rgba(0, 242, 234, 0.5);
 }
 
 .swipe-hint {
-    color: #ffffff;
+    color: #cccccc;
     font-size: 12px;
     margin-top: 5px;
     opacity: 0.8;
@@ -185,7 +193,7 @@ body {
 }
 
 .next-btn {
-    background: linear-gradient(45deg, #00f2ea, #ff0050);
+    background: linear-gradient(45deg, #00f2ea, #007acc);
     color: white;
     font-weight: bold;
     padding: 12px 30px;
@@ -196,11 +204,13 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 242, 234, 0.3);
     width: 100%;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .next-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 0, 80, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 242, 234, 0.5);
+    background: linear-gradient(45deg, #007acc, #00f2ea);
 }
 
 /* TikTok-style side buttons */
@@ -232,10 +242,10 @@ body {
 }
 
 .side-btn:hover {
-    background: rgba(255, 0, 80, 0.8);
-    border-color: #ff0050;
+    background: rgba(0, 242, 234, 0.8);
+    border-color: #00f2ea;
     transform: scale(1.15);
-    box-shadow: 0 6px 20px rgba(255, 0, 80, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 242, 234, 0.4);
 }
 
 .completion {
@@ -272,11 +282,12 @@ body {
 .progress-bar {
     width: 100%;
     height: 3px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 2px;
     margin-bottom: 8px;
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .progress-bar::after {
@@ -285,16 +296,18 @@ body {
     left: 0;
     top: 0;
     height: 100%;
-    background: linear-gradient(90deg, #ff0050, #00f2ea);
+    background: linear-gradient(90deg, #00f2ea, #007acc);
     border-radius: 2px;
     transition: width 0.5s ease;
     width: var(--progress, 8.33%);
+    box-shadow: 0 0 10px rgba(0, 242, 234, 0.5);
 }
 
 .progress-text {
     font-size: 11px;
-    opacity: 0.8;
-    color: white;
+    opacity: 0.9;
+    color: #cccccc;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes pulse {
