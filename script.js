@@ -6,7 +6,7 @@ const qa = [
     },
     {
         question: "If yes, do you have 1 year of related work experience?",
-        answer: "✅ Yes — Recent work as a Data Analyst and Full STack Developer at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System.",
+        answer: "✅ Yes — Recent work as a Data Analyst at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System.",
         image: "images/work-experience.jpg"
     },
     {
@@ -123,6 +123,9 @@ function displayQuestion() {
         // Update like button state
         updateLikeButtonState();
         
+        // Update comment button state
+        updateCommentButtonState();
+        
         // Reset answer state
         isAnswerShown = false;
     } else {
@@ -182,6 +185,110 @@ function handleLikeClick() {
         likedQuestions.add(currentIndex);
         likeBtn.classList.add('liked');
         console.log(`Liked question ${currentIndex + 1}`);
+    }
+}
+
+// Handle share button click
+function handleShareClick() {
+    const shareUrl = 'https://sakettommundrum.me/Tiktok-Questionnaire/';
+    
+    // Try to use the modern Clipboard API
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            showShareFeedback('Link copied to clipboard! 📋');
+        }).catch(() => {
+            fallbackCopyToClipboard(shareUrl);
+        });
+    } else {
+        // Fallback for older browsers or non-secure contexts
+        fallbackCopyToClipboard(shareUrl);
+    }
+}
+
+// Fallback copy method
+function fallbackCopyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.opacity = '0';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showShareFeedback('Link copied to clipboard! 📋');
+    } catch (err) {
+        showShareFeedback('Please copy manually: ' + text);
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Show share feedback
+function showShareFeedback(message) {
+    const shareBtn = document.querySelectorAll('.side-btn')[2]; // Third button (share)
+    const originalContent = shareBtn.innerHTML;
+    
+    shareBtn.innerHTML = '✅';
+    shareBtn.style.background = 'rgba(0, 242, 234, 0.9)';
+    
+    // Create temporary message
+    const messageEl = document.createElement('div');
+    messageEl.textContent = message;
+    messageEl.style.cssText = `
+        position: absolute;
+        right: 80px;
+        bottom: 180px;
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 15px;
+        font-size: 14px;
+        z-index: 1000;
+        white-space: nowrap;
+        animation: fadeInOut 3s ease;
+    `;
+    
+    document.querySelector('.main-container').appendChild(messageEl);
+    
+    // Reset button after 2 seconds
+    setTimeout(() => {
+        shareBtn.innerHTML = originalContent;
+        shareBtn.style.background = '';
+        if (messageEl.parentNode) {
+            messageEl.parentNode.removeChild(messageEl);
+        }
+    }, 2000);
+}
+
+// Handle comment button click
+function handleCommentClick() {
+    const currentComment = questionComments[currentIndex] || '';
+    const newComment = prompt(`Add a comment for Question ${currentIndex + 1}:`, currentComment);
+    
+    if (newComment !== null) { // User didn't cancel
+        if (newComment.trim() === '') {
+            // Remove comment if empty
+            delete questionComments[currentIndex];
+            updateCommentButtonState();
+            console.log(`Removed comment for question ${currentIndex + 1}`);
+        } else {
+            // Save comment
+            questionComments[currentIndex] = newComment.trim();
+            updateCommentButtonState();
+            console.log(`Added comment for question ${currentIndex + 1}:`, newComment.trim());
+        }
+    }
+}
+
+// Update comment button state based on whether current question has comments
+function updateCommentButtonState() {
+    const commentBtn = document.querySelectorAll('.side-btn')[1]; // Second button (comment)
+    if (questionComments[currentIndex]) {
+        commentBtn.classList.add('has-comment');
+    } else {
+        commentBtn.classList.remove('has-comment');
     }
 }
 
@@ -361,12 +468,28 @@ function setupSwipeDetection() {
         console.log('Next button touchstart detected');
     });
     
-    // Like button functionality
-    const likeBtn = document.querySelector('.side-btn');
-    likeBtn.addEventListener('click', (e) => {
+    // Side button functionality
+    const sideButtons = document.querySelectorAll('.side-btn');
+    
+    // Like button (first button)
+    sideButtons[0].addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         handleLikeClick();
+    });
+    
+    // Comment button (second button)
+    sideButtons[1].addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleCommentClick();
+    });
+    
+    // Share button (third button)
+    sideButtons[2].addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleShareClick();
     });
 }
 
