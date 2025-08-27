@@ -63,8 +63,6 @@ const qa = [
 
 let currentIndex = 0;
 let isAnswerShown = false;
-let likedQuestions = new Set(); // Track which questions have been liked
-let questionComments = {}; // Store comments for each question
 
 // DOM elements
 const questionEl = document.getElementById('question');
@@ -120,12 +118,6 @@ function displayQuestion() {
         nextBtn.style.display = 'block';
         nextBtn.textContent = 'Skip Question ⏭️';
         
-        // Update like button state
-        updateLikeButtonState();
-        
-        // Update comment button state
-        updateCommentButtonState();
-        
         // Reset answer state
         isAnswerShown = false;
     } else {
@@ -158,137 +150,6 @@ function goToPreviousQuestion() {
         currentIndex--;
         displayQuestion();
         updateProgress();
-    }
-}
-
-// Update like button state based on current question
-function updateLikeButtonState() {
-    const likeBtn = document.querySelector('.side-btn');
-    if (likedQuestions.has(currentIndex)) {
-        likeBtn.classList.add('liked');
-    } else {
-        likeBtn.classList.remove('liked');
-    }
-}
-
-// Handle like button click
-function handleLikeClick() {
-    const likeBtn = document.querySelector('.side-btn');
-    
-    if (likedQuestions.has(currentIndex)) {
-        // Unlike the question
-        likedQuestions.delete(currentIndex);
-        likeBtn.classList.remove('liked');
-        console.log(`Unliked question ${currentIndex + 1}`);
-    } else {
-        // Like the question
-        likedQuestions.add(currentIndex);
-        likeBtn.classList.add('liked');
-        console.log(`Liked question ${currentIndex + 1}`);
-    }
-}
-
-// Handle share button click
-function handleShareClick() {
-    const shareUrl = 'https://sakettommundrum.me/Tiktok-Questionnaire/';
-    
-    // Try to use the modern Clipboard API
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(shareUrl).then(() => {
-            showShareFeedback('Link copied to clipboard! 📋');
-        }).catch(() => {
-            fallbackCopyToClipboard(shareUrl);
-        });
-    } else {
-        // Fallback for older browsers or non-secure contexts
-        fallbackCopyToClipboard(shareUrl);
-    }
-}
-
-// Fallback copy method
-function fallbackCopyToClipboard(text) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.opacity = '0';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    
-    try {
-        document.execCommand('copy');
-        showShareFeedback('Link copied to clipboard! 📋');
-    } catch (err) {
-        showShareFeedback('Please copy manually: ' + text);
-    }
-    
-    document.body.removeChild(textArea);
-}
-
-// Show share feedback
-function showShareFeedback(message) {
-    const shareBtn = document.querySelectorAll('.side-btn')[2]; // Third button (share)
-    const originalContent = shareBtn.innerHTML;
-    
-    shareBtn.innerHTML = '✅';
-    shareBtn.style.background = 'rgba(0, 242, 234, 0.9)';
-    
-    // Create temporary message
-    const messageEl = document.createElement('div');
-    messageEl.textContent = message;
-    messageEl.style.cssText = `
-        position: absolute;
-        right: 80px;
-        bottom: 180px;
-        background: rgba(0, 0, 0, 0.9);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 15px;
-        font-size: 14px;
-        z-index: 1000;
-        white-space: nowrap;
-        animation: fadeInOut 3s ease;
-    `;
-    
-    document.querySelector('.main-container').appendChild(messageEl);
-    
-    // Reset button after 2 seconds
-    setTimeout(() => {
-        shareBtn.innerHTML = originalContent;
-        shareBtn.style.background = '';
-        if (messageEl.parentNode) {
-            messageEl.parentNode.removeChild(messageEl);
-        }
-    }, 2000);
-}
-
-// Handle comment button click
-function handleCommentClick() {
-    const currentComment = questionComments[currentIndex] || '';
-    const newComment = prompt(`Add a comment for Question ${currentIndex + 1}:`, currentComment);
-    
-    if (newComment !== null) { // User didn't cancel
-        if (newComment.trim() === '') {
-            // Remove comment if empty
-            delete questionComments[currentIndex];
-            updateCommentButtonState();
-            console.log(`Removed comment for question ${currentIndex + 1}`);
-        } else {
-            // Save comment
-            questionComments[currentIndex] = newComment.trim();
-            updateCommentButtonState();
-            console.log(`Added comment for question ${currentIndex + 1}:`, newComment.trim());
-        }
-    }
-}
-
-// Update comment button state based on whether current question has comments
-function updateCommentButtonState() {
-    const commentBtn = document.querySelectorAll('.side-btn')[1]; // Second button (comment)
-    if (questionComments[currentIndex]) {
-        commentBtn.classList.add('has-comment');
-    } else {
-        commentBtn.classList.remove('has-comment');
     }
 }
 
@@ -466,30 +327,6 @@ function setupSwipeDetection() {
     
     nextBtn.addEventListener('touchstart', (e) => {
         console.log('Next button touchstart detected');
-    });
-    
-    // Side button functionality
-    const sideButtons = document.querySelectorAll('.side-btn');
-    
-    // Like button (first button)
-    sideButtons[0].addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        handleLikeClick();
-    });
-    
-    // Comment button (second button)
-    sideButtons[1].addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        handleCommentClick();
-    });
-    
-    // Share button (third button)
-    sideButtons[2].addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        handleShareClick();
     });
 }
 
