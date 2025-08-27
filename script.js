@@ -5,7 +5,7 @@ const qa = [
     },
     {
         question: "If yes, do you have 1 year of related work experience?",
-        answer: "✅ Yes — 1+ year as a Full-Stack Developer & Data Scientist at Prompt LLC, building a real-time Gunshot Detection & Analytics System."
+        answer: "✅ Yes — Recent work as a Data Analyst at Prompt LLC, building a real-time Gunshot Detection & Analytics Dashboard System."
     },
     {
         question: "Do you have a Bachelor's degree or foreign equivalent?",
@@ -13,7 +13,7 @@ const qa = [
     },
     {
         question: "Do you have 3 years of related work experience?",
-        answer: "✅ Yes — Over 3 years of combined experience in analytics, IoT projects, BI dashboards & Python-based automation."
+        answer: "✅ Yes — Over 3 years as Technical & Marketing Lead at Team Solarium, leveraging business analytics to craft national-level business strategies and present award-winning plans."
     },
     {
         question: "Do you have 1 year of experience using SQL on large datasets?",
