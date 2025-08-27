@@ -11,7 +11,7 @@ const qa = [
     },
     {
         question: "Do you have a Bachelor's degree or foreign equivalent?",
-        answer: "✅ Yes — Bachelor's in Mechanical Engineering. Led a Solar EV team achieving a 25% efficiency improvement using simulation-driven design.",
+        answer: "✅ Yes — Bachelor's in Mechanical Engineering (GPA 3.87/4.0). Specializing in design engineering, optimization and engineering management",
         image: "images/bachelors-degree.jpg"
     },
     {
@@ -26,12 +26,12 @@ const qa = [
     },
     {
         question: "Do you have 1 year of experience automating data reports and quality reviews?",
-        answer: "✅ Yes — Built automated reporting pipelines in Python, Power BI & SQL, reducing manual reporting time by 70%.",
+        answer: "✅ Yes — Automated reporting pipelines using Python, SQL, and Power BI, and leveraged Microsoft Power Automate to schedule refreshes, distribute dashboards, and trigger email alerts, ensuring 100% data accuracy and efficiency.",
         image: "images/automation.jpg"
     },
     {
         question: "Do you have 1 year of experience identifying business problems and proposing growth opportunities?",
-        answer: "✅ Yes — Delivered insights via Power BI dashboards that helped executives cut operational costs by 18%.",
+        answer: "✅ Yes — Delivered insights via Excel and Power BI that helped optimize operational costs by 18%.",
         image: "images/business-analytics.jpg"
     },
     {
