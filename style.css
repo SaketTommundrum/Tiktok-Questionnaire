@@ -57,10 +57,11 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 80px;
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 100;
@@ -74,6 +75,35 @@ body {
     color: #00f2ea;
     text-align: center;
     text-shadow: 0 0 10px rgba(0, 242, 234, 0.5);
+    margin-bottom: 8px;
+}
+
+.profile-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    background: rgba(0, 242, 234, 0.2);
+    border: 1px solid rgba(0, 242, 234, 0.4);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.profile-link:hover {
+    background: rgba(0, 242, 234, 0.4);
+    border-color: #00f2ea;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 242, 234, 0.3);
+    color: #00f2ea;
 }
 
 /* Ensure all content stays above the overlay */
@@ -86,13 +116,13 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 80px 20px 100px;
+    padding: 100px 20px 100px;
     position: relative;
 }
 
 .question {
     position: absolute;
-    top: 100px;
+    top: 120px;
     left: 20px;
     right: 20px;
     font-size: 18px;
